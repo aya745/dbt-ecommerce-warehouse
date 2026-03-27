@@ -1,0 +1,6 @@
+customer_id,first_name,last_name,email,signup_date,country
+1,Aya,Chouate,aya@example.com,2025-01-10,Morocco
+2,Yahya,ElMansouri,yahya@example.com,2025-01-15,Morocco
+3,Sara,Bennani,sara@example.com,2025-02-01,France
+4,Omar,Tazi,omar@example.com,2025-02-10,Canada
+5,Lina,Amrani,lina@example.com,2025-03-05,Morocco

@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Cleaned customer data from the seed file.
+    columns:
+      - name: customer_id
+        description: Unique identifier for each customer.
+        tests:
+          - not_null
+          - unique
+
+      - name: email
+        description: Customer email address.
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: Cleaned product data from the seed file.
+    columns:
+      - name: product_id
+        description: Unique identifier for each product.
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_orders
+    description: Cleaned order data from the seed file.
+    columns:
+      - name: order_id
+        description: Unique identifier for each order.
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: Customer who placed the order.
+        tests:
+          - not_null
+
+      - name: status
+        description: Order status.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'cancelled', 'processing']
+
+  - name: stg_order_items
+    description: Cleaned order item line data from the seed file.
+    columns:
+      - name: order_item_id
+        description: Unique identifier for each order item line.
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: Related order identifier.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+
+      - name: product_id
+        description: Related product identifier.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+  - name: dim_customers
+    description: Customer dimension table for analytics.
+
+  - name: dim_products
+    description: Product dimension table for analytics.
+
+  - name: fct_order_items
+    description: Fact table at the order-item grain.
+
+  - name: fct_orders
+    description: Fact table at the order grain.
