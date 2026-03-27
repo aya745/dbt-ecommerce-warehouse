@@ -81,3 +81,66 @@ models:
 
   - name: fct_orders
     description: Fact table at the order grain.
+
+    - name: daily_sales_summary
+    description: Daily revenue and order summary for completed orders.
+    columns:
+      - name: order_date
+        description: Date of completed orders.
+        tests:
+          - not_null
+          - unique
+
+      - name: total_orders
+        description: Number of completed orders on that date.
+        tests:
+          - not_null
+
+      - name: total_quantity_sold
+        description: Total quantity sold on that date.
+        tests:
+          - not_null
+
+      - name: total_revenue
+        description: Total completed-order revenue on that date.
+        tests:
+          - not_null
+
+      - name: average_order_value
+        description: Average order value for completed orders on that date.
+        tests:
+          - not_null
+
+  - name: product_sales_summary
+    description: Product-level sales summary for completed orders.
+    columns:
+      - name: product_id
+        description: Unique product identifier.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_name
+        description: Product name.
+        tests:
+          - not_null
+
+      - name: category
+        description: Product category.
+        tests:
+          - not_null
+
+      - name: total_orders
+        description: Number of completed orders containing the product.
+        tests:
+          - not_null
+
+      - name: total_quantity_sold
+        description: Total quantity sold for the product.
+        tests:
+          - not_null
+
+      - name: total_revenue
+        description: Total completed-order revenue for the product.
+        tests:
+          - not_null
